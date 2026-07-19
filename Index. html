@@ -1,0 +1,307 @@
+index <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mi Asistente</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--az:#1a56db;--ve:#15803d;--ro:#dc2626;--mo:#7c3aed;--rs:#db2777;--na:#d97706;--fo:#f0f4ff;--ra:22px;--sh:0 4px 18px rgba(0,0,0,.13)}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fo);min-height:100vh;overflow-x:hidden}
+.p{display:none;min-height:100vh;padding-bottom:30px}.p.a{display:block}
+.hp{background:var(--az);padding:18px 16px 14px;text-align:center;color:#fff}
+.hp h1{font-size:26px;font-weight:800}.hp p{font-size:15px;opacity:.85;margin-top:3px}
+.av{background:#fffbeb;border:2px solid #f59e0b;border-radius:var(--ra);margin:14px 14px 6px;padding:14px 16px;display:flex;align-items:center;gap:12px;font-size:16px;color:#78350f;font-weight:600;transition:opacity .5s,max-height .5s;overflow:hidden;max-height:100px}
+.av.ok{opacity:0;max-height:0;margin:0;padding:0;border:none}
+.av .ic{font-size:28px;flex-shrink:0}
+.bs{margin:0 14px 14px;display:flex;gap:10px}
+.bs input{flex:1;padding:18px 16px;border:3px solid var(--az);border-radius:var(--ra);font-size:18px;font-family:inherit;background:#fff;box-shadow:var(--sh)}
+.bs input:focus{outline:none}
+.bs button{padding:18px 20px;background:var(--az);color:#fff;border:none;border-radius:var(--ra);font-size:24px;cursor:pointer;box-shadow:var(--sh)}
+.gb{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px}
+.bn{background:#fff;border-radius:var(--ra);box-shadow:var(--sh);border:3.5px solid var(--az);padding:24px 10px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:transform .12s;position:relative;min-height:140px;justify-content:center}
+.bn:active{transform:scale(.96)}.bn .em{font-size:48px;line-height:1}
+.bn .nm{font-size:20px;font-weight:800;color:#111;text-align:center}
+.bn .sb{font-size:14px;color:#555;text-align:center}
+.bv{background:var(--az);color:#fff;border-radius:0 var(--ra) 0 12px;font-size:11px;font-weight:700;padding:3px 8px;position:absolute;top:-2px;right:-2px}
+.baz{border-color:var(--az)}.bve{border-color:var(--ve)}.bro{border-color:var(--ro)}.bmo{border-color:var(--mo)}.brs{border-color:var(--rs)}.bna{border-color:var(--na)}
+.hs{position:sticky;top:0;z-index:999;background:var(--az);display:flex;align-items:center;gap:12px;padding:14px 16px;box-shadow:0 3px 12px rgba(0,0,0,.2)}
+.vv{background:#fff;color:var(--az);border:none;border-radius:50px;padding:10px 20px;font-size:17px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.vv:active{opacity:.8}.hs h2{color:#fff;font-size:20px;font-weight:700}
+.cs{padding:16px}
+.ba{width:100%;padding:22px 20px;border-radius:var(--ra);border:none;font-size:20px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:14px;margin-bottom:14px;box-shadow:var(--sh);transition:transform .12s}
+.ba:active{transform:scale(.97)}.ba .e{font-size:36px}
+.ba .t{display:flex;flex-direction:column;align-items:flex-start}
+.ba .t span{font-size:14px;opacity:.85;font-weight:400}
+.gve{background:var(--ve)}.gaz{background:var(--az)}.gro{background:var(--ro)}.gmo{background:var(--mo)}.grs{background:var(--rs)}.gna{background:var(--na)}
+.gcg{background:#10a37f}.gcl{background:#c96a3a}.ggm{background:#1a56db}
+.ic2{background:#e0f2fe;border:2px solid #0284c7;border-radius:var(--ra);padding:16px;margin-bottom:16px;font-size:16px;color:#0c4a6e;line-height:1.5}
+.cp{background:#111;color:#fff;font-size:48px;text-align:right;padding:20px 18px;border-radius:var(--ra);margin-bottom:14px;min-height:90px;word-break:break-all;font-weight:300}
+.cp .pr{font-size:18px;color:#aaa;min-height:24px;margin-bottom:4px}
+.gc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tc{padding:22px 10px;border-radius:14px;border:none;font-size:24px;font-weight:700;cursor:pointer;transition:transform .1s}
+.tc:active{transform:scale(.93)}.tc.nu{background:#fff;color:#111;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.tc.op{background:var(--az);color:#fff}.tc.ig{background:var(--ve);color:#fff}
+.tc.bo{background:var(--ro);color:#fff}.tc.do{grid-column:span 2}
+#vc{width:100%;border-radius:var(--ra);background:#000;max-height:55vh;object-fit:cover}
+#cc{display:none}#fp{width:100%;border-radius:var(--ra);display:none;margin-top:14px}
+.tn{display:flex;gap:8px;margin-bottom:16px}
+.tta{flex:1;padding:14px;border-radius:14px;border:2.5px solid #ccc;background:#fff;font-size:16px;font-weight:700;color:#555;cursor:pointer}
+.tta.ac{border-color:var(--az);color:var(--az);background:#e8f0ff}
+.sn{display:none}.sn.ac{display:block}
+#tn{width:100%;min-height:280px;border:2.5px solid #ccc;border-radius:var(--ra);padding:16px;font-size:18px;line-height:1.6;resize:none;font-family:inherit}
+#tn:focus{outline:none;border-color:var(--az)}
+.bgs{width:100%;padding:18px;background:var(--ve);color:#fff;border:none;border-radius:var(--ra);font-size:18px;font-weight:700;cursor:pointer;margin-top:12px}
+.ap{display:flex;gap:10px;margin-bottom:14px}
+.ap input{flex:1;padding:14px 16px;border:2.5px solid #ccc;border-radius:14px;font-size:17px;font-family:inherit}
+.ap input:focus{outline:none;border-color:var(--az)}
+.ap button{padding:14px 18px;background:var(--az);color:#fff;border:none;border-radius:14px;font-size:22px;cursor:pointer}
+.lp{display:flex;flex-direction:column;gap:10px}
+.ip{background:#fff;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:17px}
+.ip.he{text-decoration:line-through;color:#999;background:#f5f5f5}
+.ch{width:32px;height:32px;border:3px solid var(--az);border-radius:50%;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;background:#fff}
+.ch.ma{background:var(--ve);border-color:var(--ve);color:#fff}.tp{flex:1}
+.dp{background:none;border:none;color:#bbb;font-size:22px;cursor:pointer;padding:4px}
+.al{background:#fff;border-radius:var(--ra);padding:18px;margin-bottom:16px;box-shadow:var(--sh)}
+.al h3{font-size:18px;margin-bottom:12px;color:#333}
+.al input{width:100%;padding:14px 16px;border:2.5px solid #ccc;border-radius:14px;font-size:16px;font-family:inherit;margin-bottom:10px}
+.al input:focus{outline:none;border-color:var(--az)}
+.al button{width:100%;padding:16px;background:var(--az);color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer}
+.ll{display:flex;flex-direction:column;gap:12px}
+.il{background:#fff;border-radius:var(--ra);padding:18px;box-shadow:var(--sh);display:flex;align-items:center;gap:14px}
+.il .li{flex:1}.il .ln{font-size:18px;font-weight:700;color:#111}
+.il .lu{font-size:13px;color:#888;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.il .bo2{background:var(--az);color:#fff;border:none;border-radius:12px;padding:10px 16px;font-size:15px;font-weight:700;cursor:pointer}
+.il .bd{background:none;border:none;color:#ccc;font-size:20px;cursor:pointer}
+.rg{background:var(--az);border-radius:var(--ra);padding:30px 20px;text-align:center;color:#fff;margin-bottom:16px}
+.rg .ho{font-size:72px;font-weight:800;letter-spacing:-2px}
+.rg .se{font-size:28px;color:#7dd3fc}.rg .fe{font-size:20px;margin-top:8px;opacity:.9}
+.cc2{background:#fff;border-radius:var(--ra);box-shadow:var(--sh);border:3px solid var(--az);padding:20px 16px}
+.cn{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.ct{font-size:26px;font-weight:800;color:#111;text-align:center}
+.cf{background:var(--az);color:#fff;border:none;border-radius:14px;width:52px;height:52px;font-size:30px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cf:active{opacity:.8}
+.ds{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:10px}
+.ds div{text-align:center;font-size:17px;font-weight:700;color:#555;padding:8px 0}
+.ds div.fi{color:var(--ro)}
+.cg2{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cd{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;border-radius:50%;color:#111}
+.cd.fi{color:var(--ro)}.cd.ho2{background:var(--az);color:#fff}.cd.va{visibility:hidden}
+.bsg{display:flex;gap:10px;margin-bottom:16px}
+.bsg input{flex:1;padding:20px 16px;border:3px solid var(--az);border-radius:var(--ra);font-size:20px;font-family:inherit}
+.bsg input:focus{outline:none}
+.bsg button{padding:20px 22px;background:var(--az);color:#fff;border:none;border-radius:var(--ra);font-size:26px;cursor:pointer}
+#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;padding:14px 28px;border-radius:50px;font-size:16px;font-weight:600;z-index:9999;transition:transform .3s;white-space:nowrap}
+#toast.v{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="pi" class="p a">
+  <div class="hp"><h1>🏠 Mi Asistente</h1><p>Todo lo que necesitas, fácil y seguro</p></div>
+  <div class="av" id="av"><span class="ic">🛡️</span><span>Esta app es segura. Nunca te pediremos contraseñas ni datos bancarios.</span></div>
+  <div class="bs"><input type="search" id="bi" placeholder="🔍 Buscar en Google..." onkeydown="if(event.key==='Enter')bG()"><button onclick="bG()">🔍</button></div>
+  <div class="gb">
+    <div class="bn bve" onclick="ir('pt')"><div class="em">📞</div><div class="nm">Teléfono</div><div class="sb">Llamar</div></div>
+    <div class="bn baz" onclick="ir('pc')"><div class="em">🧮</div><div class="nm">Calculadora</div><div class="sb">Cálculos fáciles</div></div>
+    <div class="bn baz" onclick="ir('pca')"><div class="em">📷</div><div class="nm">Cámara</div><div class="sb">Hacer fotos</div></div>
+    <div class="bn bve" onclick="ir('pw')"><div class="bv">🔒 SEGURO</div><div class="em">💬</div><div class="nm">WhatsApp</div><div class="sb">Mensajes seguros</div></div>
+    <div class="bn baz" onclick="ir('pco')"><div class="em">✉️</div><div class="nm">Correo</div><div class="sb">Bandeja entrada</div></div>
+    <div class="bn brs" onclick="ir('pig')"><div class="em">📸</div><div class="nm">Instagram</div><div class="sb">Ver fotos</div></div>
+    <div class="bn bro" onclick="ir('pyt')"><div class="em">▶️</div><div class="nm">YouTube</div><div class="sb">Ver vídeos</div></div>
+    <div class="bn bmo" onclick="ir('pia')"><div class="em">🤖</div><div class="nm">Asistente IA</div><div class="sb">ChatGPT · Claude · Gemini</div></div>
+    <div class="bn bna" onclick="ir('pno')"><div class="em">📝</div><div class="nm">Notas</div><div class="sb">Apuntes y pendientes</div></div>
+    <div class="bn baz" onclick="ir('pl')"><div class="em">🔗</div><div class="nm">Mis Apps</div><div class="sb">Links guardados</div></div>
+    <div class="bn baz" onclick="ir('pkal')"><div class="em">📅</div><div class="nm">Calendario</div><div class="sb">Ver el mes</div></div>
+    <div class="bn baz" onclick="ir('pr')"><div class="em">🕐</div><div class="nm">Reloj</div><div class="sb">Hora y fecha</div></div>
+  </div>
+</div>
+
+<div id="pt" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>📞 Teléfono</h2></div>
+  <div class="cs">
+    <div class="ic2"><strong>📞 Marcar número</strong><br>Escribe el número y toca Llamar.</div>
+    <div style="background:#fff;border-radius:22px;padding:20px;box-shadow:var(--sh);margin-bottom:16px">
+      <input id="it" type="tel" placeholder="Número de teléfono" style="width:100%;padding:18px;font-size:28px;border:2.5px solid #ccc;border-radius:16px;text-align:center;font-family:inherit;letter-spacing:2px">
+    </div>
+    <button class="ba gve" onclick="ll()"><span class="e">📞</span><span class="t">Llamar<span>Abre el marcador del celular</span></span></button>
+    <button class="ba gaz" onclick="document.getElementById('it').value=''"><span class="e">🗑️</span><span class="t">Borrar número</span></button>
+  </div>
+</div>
+
+<div id="pc" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>🧮 Calculadora</h2></div>
+  <div class="cs">
+    <div class="cp"><div class="pr" id="cp2"></div><div id="cd2">0</div></div>
+    <div class="gc">
+      <button class="tc bo" onclick="cAC()">AC</button><button class="tc op" onclick="cOp('%')">%</button><button class="tc op" onclick="cOp('±')">±</button><button class="tc op" onclick="cOp('÷')">÷</button>
+      <button class="tc nu" onclick="cN('7')">7</button><button class="tc nu" onclick="cN('8')">8</button><button class="tc nu" onclick="cN('9')">9</button><button class="tc op" onclick="cOp('×')">×</button>
+      <button class="tc nu" onclick="cN('4')">4</button><button class="tc nu" onclick="cN('5')">5</button><button class="tc nu" onclick="cN('6')">6</button><button class="tc op" onclick="cOp('−')">−</button>
+      <button class="tc nu" onclick="cN('1')">1</button><button class="tc nu" onclick="cN('2')">2</button><button class="tc nu" onclick="cN('3')">3</button><button class="tc op" onclick="cOp('+')">+</button>
+      <button class="tc nu do" onclick="cN('0')">0</button><button class="tc nu" onclick="cN('.')">.</button><button class="tc ig" onclick="cIg()">=</button>
+    </div>
+  </div>
+</div>
+
+<div id="pca" class="p">
+  <div class="hs"><button class="vv" onclick="pC();v()">← Volver</button><h2>📷 Cámara</h2></div>
+  <div class="cs">
+    <div id="ce" class="ic2">📷 Abriendo cámara...</div>
+    <video id="vc" autoplay playsinline style="display:none"></video>
+    <canvas id="cc"></canvas>
+    <img id="fp" alt="Foto tomada">
+    <button class="ba gve" style="margin-top:14px" onclick="tF()"><span class="e">📸</span><span class="t">Tomar foto</span></button>
+    <button class="ba gna" onclick="gF()"><span class="e">💾</span><span class="t">Guardar foto<span>Descargar al celular</span></span></button>
+  </div>
+</div>
+
+<div id="pw" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>💬 WhatsApp</h2></div>
+  <div class="cs">
+    <div class="ic2"><strong>💬 WhatsApp</strong><br>Al tocar se abrirá WhatsApp. Para volver usa ← arriba.</div>
+    <button class="ba gve" onclick="ab('https://wa.me/')"><span class="e">💬</span><span class="t">Abrir WhatsApp<span>Abre la app de WhatsApp</span></span></button>
+    <button class="ba gve" onclick="ab('https://web.whatsapp.com')"><span class="e">🌐</span><span class="t">WhatsApp Web<span>Versión para navegador</span></span></button>
+  </div>
+</div>
+
+<div id="pco" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>✉️ Correo</h2></div>
+  <div class="cs">
+    <div class="ic2"><strong>✉️ Correo</strong><br>Elige tu correo favorito.</div>
+    <button class="ba gro" onclick="ab('https://gmail.com')"><span class="e">📧</span><span class="t">Gmail<span>Por Google</span></span></button>
+    <button class="ba gaz" onclick="ab('https://outlook.com')"><span class="e">📨</span><span class="t">Outlook<span>Por Microsoft</span></span></button>
+    <button class="ba gmo" onclick="ab('mailto:')"><span class="e">✉️</span><span class="t">App de correo<span>Abre la app del celular</span></span></button>
+  </div>
+</div>
+
+<div id="pig" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>📸 Instagram</h2></div>
+  <div class="cs">
+    <div class="ic2"><strong>📸 Instagram</strong><br>Para volver usa ← arriba o el botón físico ◁.</div>
+    <button class="ba grs" onclick="ab('https://www.instagram.com')"><span class="e">📸</span><span class="t">Abrir Instagram<span>Ver fotos y videos</span></span></button>
+  </div>
+</div>
+
+<div id="pyt" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>▶️ YouTube</h2></div>
+  <div class="cs">
+    <div class="bsg"><input id="iy" type="text" placeholder="¿Qué quieres buscar?" onkeydown="if(event.key==='Enter')bY()"><button onclick="bY()">🔍</button></div>
+    <button class="ba gro" onclick="bY()"><span class="e">🔍</span><span class="t">Buscar en YouTube</span></button>
+    <button class="ba gro" onclick="ab('https://www.youtube.com')"><span class="e">▶️</span><span class="t">Abrir YouTube<span>Página principal</span></span></button>
+  </div>
+</div>
+
+<div id="pia" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>🤖 Asistente IA</h2></div>
+  <div class="cs">
+    <div class="ic2"><strong>🤖 ¿Qué IA quieres usar?</strong><br>Se abrirá en una nueva pestaña.</div>
+    <button class="ba gcg" onclick="ab('https://chatgpt.com')"><span class="e">🟢</span><span class="t">ChatGPT<span>Por OpenAI · El más conocido</span></span></button>
+    <button class="ba gcl" onclick="ab('https://claude.ai')"><span class="e">🟠</span><span class="t">Claude<span>Por Anthropic · Muy natural</span></span></button>
+    <button class="ba ggm" onclick="ab('https://gemini.google.com')"><span class="e">🔵</span><span class="t">Gemini<span>Por Google · Integrado con Google</span></span></button>
+  </div>
+</div>
+
+<div id="pno" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>📝 Notas</h2></div>
+  <div class="cs">
+    <div class="tn">
+      <button class="tta ac" onclick="tN('notas',this)">📝 Notas</button>
+      <button class="tta" onclick="tN('pendientes',this)">✅ Pendientes</button>
+    </div>
+    <div id="tab-notas" class="sn ac">
+      <textarea id="tn" placeholder="Escribe aquí tus notas..."></textarea>
+      <button class="bgs" onclick="gNo()">💾 Guardar notas</button>
+    </div>
+    <div id="tab-pendientes" class="sn">
+      <div class="ap"><input id="ip2" type="text" placeholder="Nueva tarea..." onkeydown="if(event.key==='Enter')aP()"><button onclick="aP()">+</button></div>
+      <div class="lp" id="lp2"></div>
+    </div>
+  </div>
+</div>
+
+<div id="pl" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>🔗 Mis Apps</h2></div>
+  <div class="cs">
+    <div class="al">
+      <h3>➕ Guardar nuevo link</h3>
+      <input id="ln" type="text" placeholder="Nombre (ej: Mi Domino)">
+      <input id="lu" type="url" placeholder="URL (ej: https://miapp.netlify.app)">
+      <button onclick="gL()">💾 Guardar</button>
+    </div>
+    <div class="ll" id="ll2"></div>
+  </div>
+</div>
+
+<div id="pkal" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>📅 Calendario</h2></div>
+  <div class="cs">
+    <div class="cc2">
+      <div class="cn">
+        <button class="cf" onclick="cM(-1)">‹</button>
+        <div class="ct" id="cti"></div>
+        <button class="cf" onclick="cM(1)">›</button>
+      </div>
+      <div class="ds"><div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div class="fi">S</div><div class="fi">D</div></div>
+      <div class="cg2" id="cg2"></div>
+    </div>
+  </div>
+</div>
+
+<div id="pr" class="p">
+  <div class="hs"><button class="vv" onclick="v()">← Volver</button><h2>🕐 Reloj</h2></div>
+  <div class="cs">
+    <div class="rg">
+      <div class="ho" id="rh">00:00</div>
+      <div class="se" id="rs2">:00</div>
+      <div class="fe" id="rf"></div>
+    </div>
+    <button class="ba gro" onclick="ab('intent://com.android.deskclock#Intent;scheme=android-app;end')">
+      <span class="e">⏰</span><span class="t">Abrir Alarma<span>App de reloj del celular</span></span>
+    </button>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script>
+let cur='pi';
+function ir(id){document.getElementById(cur).classList.remove('a');document.getElementById(id).classList.add('a');cur=id;window.scrollTo(0,0);if(id==='pr')iR();if(id==='pno'){cNo();rP();}if(id==='pl')rL();if(id==='pca')iC();if(id==='pkal')rCal();}
+function v(){document.getElementById(cur).classList.remove('a');document.getElementById('pi').classList.add('a');cur='pi';window.scrollTo(0,0);}
+function ab(u){window.open(u,'_blank');}
+setTimeout(()=>{const a=document.getElementById('av');if(a)a.classList.add('ok');},3000);
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('v');setTimeout(()=>t.classList.remove('v'),2800);}
+function bG(){const q=(document.getElementById('bi').value||'').trim();if(!q){toast('✏️ Escribe qué quieres buscar');return;}window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank');}
+function ll(){const n=document.getElementById('it').value.trim();if(!n){toast('✏️ Escribe un número primero');return;}window.location.href='tel:'+n;}
+let cV='0',cO=null,cA=null,cNu=false;
+function cN(n){if(cNu){cV=n==='.'?'0.':n;cNu=false;}else{if(n==='.'&&cV.includes('.'))return;cV=cV==='0'&&n!=='.'?n:cV+n;}document.getElementById('cd2').textContent=cV;}
+function cOp(o){if(o==='±'){cV=String(-parseFloat(cV));document.getElementById('cd2').textContent=cV;return;}if(o==='%'){cV=String(parseFloat(cV)/100);document.getElementById('cd2').textContent=cV;return;}cA=parseFloat(cV);cO=o;cNu=true;document.getElementById('cp2').textContent=cV+' '+o;}
+function cIg(){if(!cO||cA===null)return;const b=parseFloat(cV);let r;if(cO==='+')r=cA+b;else if(cO==='−')r=cA-b;else if(cO==='×')r=cA*b;else if(cO==='÷')r=b!==0?cA/b:'Error';cV=String(Math.round(r*1e10)/1e10);document.getElementById('cd2').textContent=cV;document.getElementById('cp2').textContent='';cO=null;cA=null;cNu=true;}
+function cAC(){cV='0';cO=null;cA=null;cNu=false;document.getElementById('cd2').textContent='0';document.getElementById('cp2').textContent='';}
+let sc=null;
+async function iC(){const e=document.getElementById('ce'),vd=document.getElementById('vc');try{e.textContent='📷 Pidiendo permiso de cámara...';e.style.display='block';sc=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});vd.srcObject=sc;vd.style.display='block';e.style.display='none';}catch(er){vd.style.display='none';e.textContent=er.name==='NotAllowedError'?'❌ Permiso denegado. Ve a Configuración de Chrome → Configuración del sitio → Cámara y actívala.':'❌ No se pudo acceder a la cámara.';}}
+function tF(){const vd=document.getElementById('vc'),c=document.getElementById('cc');if(!sc){toast('📷 Espera a que la cámara cargue');return;}c.width=vd.videoWidth;c.height=vd.videoHeight;c.getContext('2d').drawImage(vd,0,0);const img=document.getElementById('fp');img.src=c.toDataURL('image/jpeg',.92);img.style.display='block';toast('✅ Foto tomada');}
+function gF(){const img=document.getElementById('fp');if(!img.src||img.style.display==='none'){toast('📷 Primero toma una foto');return;}const a=document.createElement('a');a.href=img.src;a.download='foto-'+Date.now()+'.jpg';a.click();toast('💾 Foto guardada');}
+function pC(){if(sc){sc.getTracks().forEach(t=>t.stop());sc=null;}}
+function bY(){const q=document.getElementById('iy').value.trim();if(!q){toast('✏️ Escribe qué quieres buscar');return;}window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank');}
+function tN(t,b){document.querySelectorAll('.tta').forEach(x=>x.classList.remove('ac'));document.querySelectorAll('.sn').forEach(x=>x.classList.remove('ac'));document.getElementById('tab-'+t).classList.add('ac');b.classList.add('ac');if(t==='pendientes')rP();}
+function gNo(){localStorage.setItem('notas',document.getElementById('tn').value);toast('✅ Notas guardadas');}
+function cNo(){const n=localStorage.getItem('notas');if(n)document.getElementById('tn').value=n;}
+function gP(){return JSON.parse(localStorage.getItem('pend')||'[]');}
+function sP(p){localStorage.setItem('pend',JSON.stringify(p));}
+function aP(){const i=document.getElementById('ip2'),t=i.value.trim();if(!t)return;const p=gP();p.push({id:Date.now(),texto:t,hecho:false});sP(p);i.value='';rP();toast('✅ Tarea agregada');}
+function rP(){const l=document.getElementById('lp2');if(!l)return;const p=gP();if(p.length===0){l.innerHTML='<div class="ic2">Sin tareas aún.</div>';return;}l.innerHTML=p.map(t=>`<div class="ip ${t.hecho?'he':''}"><div class="ch ${t.hecho?'ma':''}" onclick="tP(${t.id})">${t.hecho?'✓':''}</div><div class="tp">${t.texto}</div><button class="dp" onclick="bP(${t.id})">✕</button></div>`).join('');}
+function tP(id){sP(gP().map(t=>t.id===id?{...t,hecho:!t.hecho}:t));rP();}
+function bP(id){sP(gP().filter(t=>t.id!==id));rP();}
+function gLi(){return JSON.parse(localStorage.getItem('links')||'[]');}
+function sL(l){localStorage.setItem('links',JSON.stringify(l));}
+function gL(){const n=document.getElementById('ln').value.trim();let u=document.getElementById('lu').value.trim();if(!n||!u){toast('✏️ Escribe nombre y URL');return;}if(!u.startsWith('http'))u='https://'+u;const l=gLi();l.push({id:Date.now(),nombre:n,url:u});sL(l);document.getElementById('ln').value='';document.getElementById('lu').value='';rL();toast('🔗 Link guardado');}
+function rL(){const li=document.getElementById('ll2');if(!li)return;const l=gLi();if(l.length===0){li.innerHTML='<div class="ic2">Sin links guardados aún.</div>';return;}li.innerHTML=l.map(lk=>`<div class="il"><div class="li"><div class="ln">🌐 ${lk.nombre}</div><div class="lu">${lk.url}</div></div><button class="bo2" onclick="window.open('${lk.url}','_blank')">Abrir</button><button class="bd" onclick="bL(${lk.id})">✕</button></div>`).join('');}
+function bL(id){sL(gLi().filter(l=>l.id!==id));rL();toast('🗑️ Link eliminado');}
+let ri=null;
+function iR(){aR();if(ri)clearInterval(ri);ri=setInterval(aR,1000);}
+function aR(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');document.getElementById('rh').textContent=h+':'+m;document.getElementById('rs2').textContent=':'+s;const ds=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];document.getElementById('rf').textContent=ds[n.getDay()]+', '+n.getDate()+' de '+ms[n.getMonth()]+' de '+n.getFullYear();}
+let cY=new Date().getFullYear(),cMo=new Date().getMonth();
+function cM(d){cMo+=d;if(cMo>11){cMo=0;cY++;}if(cMo<0){cMo=11;cY--;}rCal();}
+function rCal(){const ms=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];document.getElementById('cti').textContent=ms[cMo]+' '+cY;const h=new Date(),pd=new Date(cY,cMo,1).getDay(),of=pd===0?6:pd-1,dm=new Date(cY,cMo+1,0).getDate();let html='';for(let i=0;i<of;i++)html+='<div class="cd va"></div>';for(let d=1;d<=dm;d++){const ds=new Date(cY,cMo,d).getDay(),fi=ds===0||ds===6,hoy=d===h.getDate()&&cMo===h.getMonth()&&cY===h.getFullYear();html+=`<div class="cd ${fi?'fi':''} ${hoy?'ho2':''}">${d}</div>`;}document.getElementById('cg2').innerHTML=html;}
+cNo();rP();rL();
+</script>
+</body>
+</html>
